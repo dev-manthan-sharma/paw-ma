@@ -1,6 +1,23 @@
 import crypto from "crypto"
 import { extractDomain } from "../utils/index"
 
+/**
+ * Represents the result structure returned by the main function.
+ *
+ * @property url - The original URL provided to the main function.
+ * @property masterPassword - The master password provided to the main function.
+ * @property domain - The extracted domain from the provided URL (if successfully extracted).
+ * @property generatedPassword - The deterministic password generated based on the extracted domain and master password (if generated successfully).
+ * @property error - An error message in case of a failure during processing.
+ */
+type V1 = {
+    url?: string;
+    masterPassword?: string;
+    domain?: string;
+    generatedPassword?: string;
+    error?: string;
+}
+
 namespace v1 {
 
     /**
@@ -13,6 +30,11 @@ namespace v1 {
      * @returns A generated password meeting common complexity rules.
      */
     function generatePassword(identifier: string, masterPassword: string): string {
+        // Check is Master Password Exists
+        if (!masterPassword) {
+            throw new Error(`Master Password Required`);
+        }
+
         // Character sets for each category.
         const uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const lowercaseCharacters = "abcdefghijklmnopqrstuvwxyz";
@@ -109,12 +131,22 @@ namespace v1 {
      *
      * @param url - A valid URL from which the domain is extracted.
      * @param masterPassword - The user's secret master password used to generate the password.
-     * @returns A deterministic password string generated based on the extracted domain and master password.
+     * @returns An object of type V1 containing:
+     *            - url: the original URL provided.
+     *            - masterPassword: the master password provided.
+     *            - domain: the extracted domain from the URL (if extraction is successful).
+     *            - generatedPassword: the deterministic password generated based on the extracted domain
+     *              and the master password (if generation is successful).
+     *            - error: an error message if any error occurred during processing.
      */
-    export function main(url: string, masterPassword: string): string {
-        const domain = extractDomain(url);
-        const generatedPassword = generatePassword(domain, masterPassword);
-        return generatedPassword;
+    export function main(url: string, masterPassword: string): V1 {
+        try {
+            const domain = extractDomain(url);
+            const generatedPassword = generatePassword(domain, masterPassword);
+            return { url, masterPassword, domain, generatedPassword };
+        } catch (e) {
+            return { url, masterPassword, error: e instanceof Error ? e.message : String(e) };
+        }
     }
 }
 

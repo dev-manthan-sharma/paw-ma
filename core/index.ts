@@ -1,1 +1,3 @@
-export default null;
+import * as core from "./src";
+
+export default core

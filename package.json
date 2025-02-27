@@ -12,5 +12,8 @@
   "bugs": {
     "url": "https://github.com/dev-manthan-sharma/paw-ma/issues"
   },
-  "homepage": "https://github.com/dev-manthan-sharma/paw-ma#readme"
+  "homepage": "https://github.com/dev-manthan-sharma/paw-ma#readme",
+  "workspaces": [
+    "core/*"
+  ]
 }

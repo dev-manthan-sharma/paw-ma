@@ -13,7 +13,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "next": "15.2.0",
-    "@dev-manthan-sharma/paw-ma--core": "0.1.0"
+    "@dev-manthan-sharma/paw-ma--core": "workspace:"
   },
   "devDependencies": {
     "typescript": "^5",

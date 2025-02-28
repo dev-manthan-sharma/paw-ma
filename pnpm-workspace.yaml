@@ -1,0 +1,6 @@
+packages:
+  - core
+  - website
+  - mobile
+ignoredBuiltDependencies:
+  - sharp

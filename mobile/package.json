@@ -40,7 +40,8 @@
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "expo-dev-client": "~5.0.12"
+    "expo-dev-client": "~5.0.12",
+    "@dev-manthan-sharma/paw-ma--core": "workspace:"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

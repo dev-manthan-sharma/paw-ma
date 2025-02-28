@@ -1,7 +1,9 @@
 {
   "name": "@dev-manthan-sharma/paw-ma--mobile",
-  "main": "expo-router/entry",
   "version": "0.1.0",
+  "description": "Password Manager - Mobile",
+  "private": true,
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -50,6 +52,5 @@
     "jest-expo": "~52.0.4",
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
-  },
-  "private": true
+  }
 }

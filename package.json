@@ -15,6 +15,7 @@
   "homepage": "https://github.com/dev-manthan-sharma/paw-ma#readme",
   "workspaces": [
     "core",
-    "website"
+    "website",
+    "mobile"
   ]
 }

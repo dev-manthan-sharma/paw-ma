@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
   output: "export",
   images: {
     unoptimized: true
-  }
+  },
+  transpilePackages: ["@dev-manthan-sharma/paw-ma--core"]
 };
 
 export default nextConfig;

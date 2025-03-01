@@ -1,4 +1,4 @@
-import crypto from "crypto"
+import CryptoJS from "crypto-js"
 import { extractDomain } from "../utils/index"
 
 /**
@@ -62,19 +62,15 @@ namespace v1 {
         let seed = identifier + masterPassword + salt;
         // "Stretch" the seed using multiple rounds of HMAC-SHA256.
         for (let i = 0; i < rounds; i++) {
-            const hmac = crypto.createHmac("sha256", masterPassword);
-            hmac.update(seed);
-            seed = hmac.digest("hex");
+            seed = CryptoJS.HmacSHA256(seed, masterPassword).toString(CryptoJS.enc.Hex);
         }
 
         // Deterministic pseudo‑random number generator using the final seed.
         let counter = 0;
         function deterministicRandom(): number {
-            const hmac = crypto.createHmac("sha256", seed);
-            hmac.update((counter++).toString());
-            const digest = hmac.digest();
-            // Return a value between 0 and 255.
-            return digest.readUInt8(0);
+            const hmac = CryptoJS.HmacSHA256((counter++).toString(), seed).toString(CryptoJS.enc.Hex);
+            // Return a value between 0 and 255 by converting the first two hex characters.
+            return parseInt(hmac.substring(0, 2), 16);
         }
 
         // Helper: Get a pseudo-random character from a given character set.

@@ -2,6 +2,7 @@ import { FormEvent, useState, useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import core from "@dev-manthan-sharma/paw-ma--core";
 import Link from "next/link";
+import { getCurrentTabUrl } from '../webext/chrome-api';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +21,13 @@ export default function Home() {
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [error, setError] = useState("");
   const [isCopied, setIsCopied] = useState(false);
+
+  useEffect(() => {
+    // Only run if chrome API is available
+    getCurrentTabUrl((currentUrl) => {
+      setUrl(currentUrl || "");
+    });
+  }, [])
 
   useEffect(() => {
     // If either Url or Master Password are empty clear derived states

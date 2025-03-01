@@ -1,0 +1,10 @@
+{
+    "name": "Paw-Ma",
+    "description": "A Simple Password Manager",
+    "version": "0.1.0",
+    "manifest_version": 3,
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": "icon.png"
+    }
+}

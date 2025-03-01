@@ -2,6 +2,7 @@
 
 import { FormEvent, useState, useEffect } from "react";
 import core from "@dev-manthan-sharma/paw-ma--core";
+import Link from "next/link";
 
 /**
  * Renders the Home Page
@@ -128,11 +129,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mx-auto max-w-5xl mt-4">
+          <Link
+            href="https://mscode.in/"
+            className="mx-auto max-w-5xl mt-4"
+          >
             <p className="text-center text-gray-400">
               Made with ❤️ by Manthan Sharma
             </p>
-          </div>
+          </Link>
         </section>
       </main>
     </div>

@@ -1,6 +1,7 @@
 import { FormEvent, useState, useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import core from "@dev-manthan-sharma/paw-ma--core";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -122,11 +123,15 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mx-auto max-w-5xl mt-4">
+          <Link
+            href="https://mscode.in/"
+            className="mx-auto max-w-5xl mt-4"
+            target="_blank"
+          >
             <p className="text-center text-gray-400">
               Made with ❤️ by Manthan Sharma
             </p>
-          </div>
+          </Link>
         </section>
       </main>
     </div>

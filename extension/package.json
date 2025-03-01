@@ -1,7 +1,7 @@
 {
-  "name": "@dev-manthan-sharma/paw-ma--website",
+  "name": "@dev-manthan-sharma/paw-ma--extension",
   "version": "0.1.0",
-  "description": "Password Manager - Website",
+  "description": "Password Manager - Extension",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

@@ -2,3 +2,4 @@ packages:
   - core
   - website
   - mobile
+  - extension

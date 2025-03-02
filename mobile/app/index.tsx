@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 import * as Clipboard from 'expo-clipboard';
+import * as Linking from 'expo-linking';
 import core from "@dev-manthan-sharma/paw-ma--core";
 
 export default function Index() {
@@ -88,6 +89,7 @@ export default function Index() {
             }}
             multiline={true}
             autoCapitalize="none"
+            autoComplete="off"
           />
           <TextInput
             value={masterPassword}
@@ -103,6 +105,7 @@ export default function Index() {
             }}
             multiline={true}
             autoCapitalize="none"
+            autoComplete="off"
           />
           <TextInput
             value={domainFound}
@@ -119,6 +122,7 @@ export default function Index() {
             editable={false}
             multiline={true}
             autoCapitalize="none"
+            autoComplete="off"
           />
           <TextInput
             value={generatedPassword}
@@ -135,6 +139,7 @@ export default function Index() {
             editable={false}
             multiline={true}
             autoCapitalize="none"
+            autoComplete="off"
           />
           <Pressable
             style={{
@@ -161,7 +166,7 @@ export default function Index() {
         </View>
       </View>
 
-      <Text style={{ color: "#99a1af", fontSize: 16 }}>
+      <Text style={{ color: "#99a1af", fontSize: 16 }} onPress={() => Linking.openURL("https://mscode.in/")}>
         Made with ❤️ by Manthan Sharma
       </Text>
     </View>

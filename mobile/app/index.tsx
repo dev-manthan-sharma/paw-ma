@@ -22,6 +22,7 @@ import * as Clipboard from "expo-clipboard";
 import * as Linking from "expo-linking";
 import Feather from "@expo/vector-icons/Feather";
 import core from "@dev-manthan-sharma/paw-ma--core";
+import packageInfo from "../package.json";
 
 export default function Index() {
   const [url, setUrl] = useState("");
@@ -149,9 +150,13 @@ export default function Index() {
                 borderless: false,
                 foreground: true,
               }}
-              onPress={() => setIsMasterPasswordVisible(prev => !prev)}
+              onPress={() => setIsMasterPasswordVisible((prev) => !prev)}
             >
-              <Feather name={isMasterPasswordVisible ? "eye-off" : "eye"} size={24} color="#101828" />
+              <Feather
+                name={isMasterPasswordVisible ? "eye-off" : "eye"}
+                size={24}
+                color="#101828"
+              />
             </Pressable>
           </View>
 
@@ -214,12 +219,22 @@ export default function Index() {
         </View>
       </View>
 
-      <Text
-        style={{ color: "#99a1af", fontSize: 16 }}
-        onPress={() => Linking.openURL("https://mscode.in/")}
-      >
-        Made with ❤️ by Manthan Sharma
-      </Text>
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
+        <Text
+          style={{ color: "#99a1af", fontSize: 16 }}
+          onPress={() => Linking.openURL("https://mscode.in/")}
+        >
+          Made with ❤️ by Manthan Sharma
+        </Text>
+        <Text
+          style={{ color: "#99a1af", fontSize: 16, marginTop: 4 }}
+          onPress={() =>
+            Linking.openURL("https://github.com/dev-manthan-sharma/paw-ma")
+          }
+        >
+          {"v" + packageInfo.version}
+        </Text>
+      </View>
     </View>
   );
 }

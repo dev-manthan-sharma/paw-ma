@@ -21,6 +21,7 @@
 import { FormEvent, useState, useEffect } from "react";
 import core from "@dev-manthan-sharma/paw-ma--core";
 import Link from "next/link";
+import packageInfo from "../package.json";
 
 /**
  * Renders the Home Page
@@ -153,6 +154,14 @@ export default function Home() {
           >
             <p className="text-center text-gray-400">
               Made with ❤️ by Manthan Sharma
+            </p>
+          </Link>
+          <Link
+            href="https://github.com/dev-manthan-sharma/paw-ma"
+            className="mx-auto max-w-5xl mt-1"
+          >
+            <p className="text-center text-gray-400">
+              {"v" + packageInfo.version}
             </p>
           </Link>
         </section>

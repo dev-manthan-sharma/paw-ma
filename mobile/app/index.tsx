@@ -1,13 +1,13 @@
 /**
  * ==================================================
  * Copyright 2025 : The @dev-manthan-sharma/paw-ma Authors
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,13 +18,15 @@
 
 import { useEffect, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
-import * as Clipboard from 'expo-clipboard';
-import * as Linking from 'expo-linking';
+import * as Clipboard from "expo-clipboard";
+import * as Linking from "expo-linking";
+import Feather from "@expo/vector-icons/Feather";
 import core from "@dev-manthan-sharma/paw-ma--core";
 
 export default function Index() {
   const [url, setUrl] = useState("");
   const [masterPassword, setMasterPassword] = useState("");
+  const [isMasterPasswordVisible, setIsMasterPasswordVisible] = useState(false);
   const [domainFound, setDomainFound] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [error, setError] = useState("");
@@ -109,22 +111,50 @@ export default function Index() {
             autoCapitalize="none"
             autoComplete="off"
           />
-          <TextInput
-            value={masterPassword}
-            onChangeText={(text) => setMasterPassword(text.trim())}
-            placeholder="Master Password"
+          <View
             style={{
-              fontSize: 20,
+              flexDirection: "row",
               marginTop: 24,
               padding: 12,
               borderRadius: 16,
               borderColor: "#d1d5dc",
               borderWidth: 1,
+              alignItems: "center",
+              justifyContent: "center",
             }}
-            multiline={true}
-            autoCapitalize="none"
-            autoComplete="off"
-          />
+          >
+            <TextInput
+              value={masterPassword}
+              onChangeText={(text) => setMasterPassword(text.trim())}
+              placeholder="Master Password"
+              style={{
+                flex: 1,
+                fontSize: 20,
+                paddingEnd: 12,
+              }}
+              numberOfLines={1}
+              autoCapitalize="none"
+              autoComplete="off"
+              secureTextEntry={!isMasterPasswordVisible}
+            />
+            <Pressable
+              style={{
+                borderRadius: 10,
+                overflow: "hidden",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              android_ripple={{
+                color: "#4a5565",
+                borderless: false,
+                foreground: true,
+              }}
+              onPress={() => setIsMasterPasswordVisible(prev => !prev)}
+            >
+              <Feather name={isMasterPasswordVisible ? "eye-off" : "eye"} size={24} color="#101828" />
+            </Pressable>
+          </View>
+
           <TextInput
             value={domainFound}
             placeholder="Domain"
@@ -184,7 +214,10 @@ export default function Index() {
         </View>
       </View>
 
-      <Text style={{ color: "#99a1af", fontSize: 16 }} onPress={() => Linking.openURL("https://mscode.in/")}>
+      <Text
+        style={{ color: "#99a1af", fontSize: 16 }}
+        onPress={() => Linking.openURL("https://mscode.in/")}
+      >
         Made with ❤️ by Manthan Sharma
       </Text>
     </View>

@@ -86,9 +86,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.devmanthansharma.pawmamobile'
+    namespace 'in.mscode.pawma'
     defaultConfig {
-        applicationId 'com.devmanthansharma.pawmamobile'
+        applicationId 'in.mscode.pawma'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

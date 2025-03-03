@@ -1,4 +1,4 @@
-package com.devmanthansharma.pawmamobile
+package `in`.mscode.pawma
 
 import android.app.Application
 import android.content.res.Configuration

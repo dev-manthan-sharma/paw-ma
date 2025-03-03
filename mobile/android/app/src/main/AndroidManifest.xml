@@ -25,8 +25,8 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="myapp"/>
-        <data android:scheme="com.devmanthansharma.pawmamobile"/>
-        <data android:scheme="exp+paw-ma--mobile"/>
+        <data android:scheme="in.mscode.pawma"/>
+        <data android:scheme="exp+paw-ma-mobile"/>
       </intent-filter>
     </activity>
   </application>

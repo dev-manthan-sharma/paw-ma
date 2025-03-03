@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "paw-ma--mobile",
-    "slug": "paw-ma--mobile",
+    "name": "Paw-Ma",
+    "slug": "paw-ma-mobile",
     "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -16,7 +16,7 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.devmanthansharma.pawmamobile"
+      "package": "in.mscode.pawma"
     },
     "web": {
       "bundler": "metro",

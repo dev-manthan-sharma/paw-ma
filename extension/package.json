@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@dev-manthan-sharma/paw-ma--core": "workspace:",
+    "@dev-manthan-sharma/paw-ma--core": "workspace:^",
     "@types/chrome": "^0.0.307",
     "next": "15.2.0",
     "react": "^19.0.0",

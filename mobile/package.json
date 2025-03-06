@@ -16,7 +16,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@dev-manthan-sharma/paw-ma--core": "workspace:",
+    "@dev-manthan-sharma/paw-ma--core": "workspace:^",
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",

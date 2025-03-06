@@ -1175,7 +1175,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dev-manthan-sharma/paw-ma--core@workspace:, @dev-manthan-sharma/paw-ma--core@workspace:core":
+"@dev-manthan-sharma/paw-ma--core@workspace:^, @dev-manthan-sharma/paw-ma--core@workspace:core":
   version: 0.0.0-use.local
   resolution: "@dev-manthan-sharma/paw-ma--core@workspace:core"
   dependencies:
@@ -1188,7 +1188,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dev-manthan-sharma/paw-ma--extension@workspace:extension"
   dependencies:
-    "@dev-manthan-sharma/paw-ma--core": "workspace:"
+    "@dev-manthan-sharma/paw-ma--core": "workspace:^"
     "@eslint/eslintrc": "npm:^3"
     "@tailwindcss/postcss": "npm:^4"
     "@types/chrome": "npm:^0.0.307"
@@ -1210,7 +1210,7 @@ __metadata:
   resolution: "@dev-manthan-sharma/paw-ma--mobile@workspace:mobile"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@dev-manthan-sharma/paw-ma--core": "workspace:"
+    "@dev-manthan-sharma/paw-ma--core": "workspace:^"
     "@expo/vector-icons": "npm:^14.0.2"
     "@react-navigation/bottom-tabs": "npm:^7.2.0"
     "@react-navigation/native": "npm:^7.0.14"
@@ -1251,7 +1251,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dev-manthan-sharma/paw-ma--website@workspace:website"
   dependencies:
-    "@dev-manthan-sharma/paw-ma--core": "workspace:"
+    "@dev-manthan-sharma/paw-ma--core": "workspace:^"
     "@eslint/eslintrc": "npm:^3"
     "@tailwindcss/postcss": "npm:^4"
     "@types/node": "npm:^20"

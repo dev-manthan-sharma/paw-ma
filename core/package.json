@@ -1,0 +1,21 @@
+{
+  "name": "@dev-manthan-sharma/paw-ma--core",
+  "version": "0.1.0",
+  "description": "Password Manager - Core",
+  "private": true,
+  "type": "module",
+  "main": "index.ts",
+  "files": [
+    "index.ts",
+    "src"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2"
+  }
+}

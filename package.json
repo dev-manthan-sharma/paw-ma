@@ -1,0 +1,26 @@
+{
+  "name": "@dev-manthan-sharma/paw-ma",
+  "version": "0.1.0",
+  "description": "Password Manager",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-manthan-sharma/paw-ma.git"
+  },
+  "author": "Manthan Sharma",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/dev-manthan-sharma/paw-ma/issues"
+  },
+  "homepage": "https://github.com/dev-manthan-sharma/paw-ma#readme",
+  "workspaces": [
+    "core",
+    "website",
+    "mobile",
+    "extension"
+  ],
+  "packageManager": "yarn@4.7.0",
+  "devDependencies": {
+    "turbo": "^2.4.4"
+  }
+}

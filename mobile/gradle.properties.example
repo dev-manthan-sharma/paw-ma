@@ -1,0 +1,7 @@
+# Move this to ~/.gradle/gradle.properties File
+
+# Relative Path, Try using Absolute Path
+PAWMA_MOBILE_UPLOAD_STORE_FILE=my-upload-key.keystore
+PAWMA_MOBILE_UPLOAD_KEY_ALIAS=my-key-alias
+PAWMA_MOBILE_UPLOAD_STORE_PASSWORD=*****
+PAWMA_MOBILE_UPLOAD_KEY_PASSWORD=*****

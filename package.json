@@ -19,5 +19,8 @@
     "mobile",
     "extension"
   ],
-  "packageManager": "yarn@4.7.0"
+  "packageManager": "yarn@4.7.0",
+  "devDependencies": {
+    "turbo": "^2.4.4"
+  }
 }

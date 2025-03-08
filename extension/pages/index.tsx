@@ -20,7 +20,7 @@ import { FormEvent, useState, useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import core from "@dev-manthan-sharma/paw-ma--core";
 import Link from "next/link";
-import { getCurrentTabUrl } from '../webext/chrome-api';
+import { getCurrentTabUrl } from '../utils/chrome-api';
 import packageInfo from "../package.json";
 
 const geistSans = Geist({

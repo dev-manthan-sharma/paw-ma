@@ -28,6 +28,7 @@ export default function Index() {
   const [url, setUrl] = useState("");
   const [masterPassword, setMasterPassword] = useState("");
   const [isMasterPasswordVisible, setIsMasterPasswordVisible] = useState(false);
+  const [accountDifferentiator, setAccountDifferentiator] = useState("");
   const [domainFound, setDomainFound] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [error, setError] = useState("");
@@ -43,12 +44,12 @@ export default function Index() {
 
     // If both Url and Master Password are not empty run v1 code and update derived states
     if (url || masterPassword) {
-      const v1 = core.v1(url, masterPassword);
+      const v1 = core.v1(url, masterPassword, accountDifferentiator);
       setDomainFound(v1.domain || "");
       setGeneratedPassword(v1.generatedPassword || "");
       setError(v1.error || "");
     }
-  }, [url, masterPassword]);
+  }, [url, masterPassword, accountDifferentiator]);
 
   // Function to handle ButtonPress
   const handleButtonPress = async () => {
@@ -159,6 +160,22 @@ export default function Index() {
               />
             </Pressable>
           </View>
+          <TextInput
+            value={accountDifferentiator}
+            onChangeText={(text) => setAccountDifferentiator(text.trim())}
+            placeholder="Account Differentiator (Optional - always stick to one type: email, username, etc.)"
+            style={{
+              fontSize: 20,
+              padding: 12,
+              marginTop: 24,
+              borderRadius: 16,
+              borderColor: "#d1d5dc",
+              borderWidth: 1
+            }}
+            multiline={true}
+            autoCapitalize="none"
+            autoComplete="off"
+          />
 
           <TextInput
             value={domainFound}

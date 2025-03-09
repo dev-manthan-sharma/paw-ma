@@ -30,6 +30,7 @@ import packageInfo from "../package.json";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [masterPassword, setMasterPassword] = useState("");
+  const [accountDifferentiator, setAccountDifferentiator] = useState("");
   const [domainFound, setDomainFound] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [error, setError] = useState("");
@@ -45,12 +46,12 @@ export default function Home() {
 
     // If both Url and Master Password are not empty run v1 code and update derived states
     if (url || masterPassword) {
-      const v1 = core.v1(url, masterPassword);
+      const v1 = core.v1(url, masterPassword, accountDifferentiator);
       setDomainFound(v1.domain || "");
       setGeneratedPassword(v1.generatedPassword || "");
       setError(v1.error || "");
     }
-  }, [url, masterPassword]);
+  }, [url, masterPassword, accountDifferentiator]);
 
   // Function to handle form submission
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -113,6 +114,17 @@ export default function Home() {
                   required
                   autoComplete="off"
                   className="w-full p-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+                />
+                <textarea
+                  name="differentiator"
+                  value={accountDifferentiator}
+                  onChange={(e) => {
+                    setAccountDifferentiator(e.target.value.trim());
+                  }}
+                  placeholder="Account Differentiator (Optional - always stick to one type: email, username, etc.)"
+                  autoComplete="off"
+                  title="An account-specific differentiator (e.g. username, email) used to generate distinct passwords for the same domain using same master password."
+                  className="w-full p-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent resize-none"
                 />
                 <input
                   type="text"

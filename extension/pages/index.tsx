@@ -1,13 +1,13 @@
 /**
  * ==================================================
  * Copyright 2025 : The @dev-manthan-sharma/paw-ma Authors
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,8 +20,9 @@ import { FormEvent, useState, useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import core from "@dev-manthan-sharma/paw-ma--core";
 import Link from "next/link";
-import { getCurrentTabUrl } from '../utils/chrome-api';
+import { getCurrentTabUrl } from "../utils/chrome-api";
 import packageInfo from "../package.json";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,9 +37,11 @@ const geistMono = Geist_Mono({
 export default function Home() {
   const [url, setUrl] = useState("");
   const [masterPassword, setMasterPassword] = useState("");
+  const [isMasterPasswordVisible, setIsMasterPasswordVisible] = useState(false);
   const [accountDifferentiator, setAccountDifferentiator] = useState("");
   const [domainFound, setDomainFound] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
+  const [isGeneratedPasswordVisible, setIsGeneratedPasswordVisible] = useState(false);
   const [error, setError] = useState("");
   const [isCopied, setIsCopied] = useState(false);
 
@@ -47,7 +50,7 @@ export default function Home() {
     getCurrentTabUrl((currentUrl) => {
       setUrl(currentUrl || "");
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     // If either Url or Master Password are empty clear derived states
@@ -71,15 +74,17 @@ export default function Home() {
     e.preventDefault();
 
     //Copy Generated Password
-    setIsCopied(true)
+    setIsCopied(true);
     navigator.clipboard.writeText(generatedPassword);
     setTimeout(() => {
       setIsCopied(false);
-    }, 3000)
+    }, 3000);
   };
 
   return (
-    <div className={`${geistSans.variable} ${geistMono.variable} grid grid-cols-12 min-w-100`}>
+    <div
+      className={`${geistSans.variable} ${geistMono.variable} grid grid-cols-12 min-w-100`}
+    >
       {/* Main Content */}
       <main className="col-span-12">
         {/* Hero Section */}
@@ -87,9 +92,7 @@ export default function Home() {
           <div className="flex-auto grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 w-full">
             <div className="lg:col-span-2 text-white self-center">
               <h1 className="text-4xl font-bold">Paw-Ma</h1>
-              <p className="text-xl pt-4">
-                A Simple Password Manager
-              </p>
+              <p className="text-xl pt-4">A Simple Password Manager</p>
             </div>
             <div className="rounded-3xl lg:col-span-2 bg-gray-100 drop-shadow-md shadow-lg shadow-white/50 flex flex-col items-start justify-center self-center">
               <form className="w-full p-8" onSubmit={handleSubmit}>
@@ -105,18 +108,31 @@ export default function Home() {
                   autoComplete="off"
                   className="w-full p-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                 />
-                <input
-                  type="password"
-                  name="master"
-                  value={masterPassword}
-                  onChange={(e) => {
-                    setMasterPassword(e.target.value.trim());
-                  }}
-                  placeholder="Master Password"
-                  required
-                  autoComplete="off"
-                  className="w-full p-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-                />
+                <div className="relative mt-4 w-full">
+                  <input
+                    type={isMasterPasswordVisible ? "text" : "password"}
+                    name="master"
+                    value={masterPassword}
+                    onChange={(e) => {
+                      setMasterPassword(e.target.value.trim());
+                    }}
+                    placeholder="Master Password"
+                    required
+                    autoComplete="off"
+                    className="w-full p-2 pr-10 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setIsMasterPasswordVisible((prev) => !prev)}
+                    className="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-500 hover:text-gray-700"
+                  >
+                    {isMasterPasswordVisible ? (
+                      <FiEyeOff size={20} />
+                    ) : (
+                      <FiEye size={20} />
+                    )}
+                  </button>
+                </div>
                 <textarea
                   name="differentiator"
                   value={accountDifferentiator}
@@ -137,15 +153,28 @@ export default function Home() {
                   autoComplete="off"
                   className="w-full p-2 mt-8 border-2 bg-gray-200 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                 />
-                <input
-                  type="text"
-                  name="password"
-                  value={generatedPassword}
-                  placeholder="Password"
-                  disabled
-                  autoComplete="off"
-                  className="w-full p-2 mt-4 border-2 bg-gray-200 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-                />
+                <div className="relative mt-4 w-full">
+                  <input
+                    type={isGeneratedPasswordVisible ? "text" : "password"}
+                    name="password"
+                    value={generatedPassword}
+                    placeholder="Password"
+                    disabled
+                    autoComplete="off"
+                    className="w-full p-2 pr-10 border-2 bg-gray-200 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setIsGeneratedPasswordVisible((prev) => !prev)}
+                    className="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-500 hover:text-gray-700"
+                  >
+                    {isGeneratedPasswordVisible ? (
+                      <FiEyeOff size={20} />
+                    ) : (
+                      <FiEye size={20} />
+                    )}
+                  </button>
+                </div>
 
                 <button
                   type="submit"

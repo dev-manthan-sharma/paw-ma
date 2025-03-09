@@ -1,13 +1,13 @@
 /**
  * ==================================================
  * Copyright 2025 : The @dev-manthan-sharma/paw-ma Authors
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +22,7 @@ import { FormEvent, useState, useEffect } from "react";
 import core from "@dev-manthan-sharma/paw-ma--core";
 import Link from "next/link";
 import packageInfo from "../package.json";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 /**
  * Renders the Home Page
@@ -30,9 +31,11 @@ import packageInfo from "../package.json";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [masterPassword, setMasterPassword] = useState("");
+  const [isMasterPasswordVisible, setIsMasterPasswordVisible] = useState(false);
   const [accountDifferentiator, setAccountDifferentiator] = useState("");
   const [domainFound, setDomainFound] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
+  const [isGeneratedPasswordVisible, setIsGeneratedPasswordVisible] = useState(false);
   const [error, setError] = useState("");
   const [isCopied, setIsCopied] = useState(false);
 
@@ -58,11 +61,11 @@ export default function Home() {
     e.preventDefault();
 
     //Copy Generated Password
-    setIsCopied(true)
+    setIsCopied(true);
     navigator.clipboard.writeText(generatedPassword);
     setTimeout(() => {
       setIsCopied(false);
-    }, 3000)
+    }, 3000);
   };
 
   return (
@@ -103,18 +106,31 @@ export default function Home() {
                   autoComplete="off"
                   className="w-full p-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                 />
-                <input
-                  type="password"
-                  name="master"
-                  value={masterPassword}
-                  onChange={(e) => {
-                    setMasterPassword(e.target.value.trim());
-                  }}
-                  placeholder="Master Password"
-                  required
-                  autoComplete="off"
-                  className="w-full p-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-                />
+                <div className="relative mt-4 w-full">
+                  <input
+                    type={isMasterPasswordVisible ? "text" : "password"}
+                    name="master"
+                    value={masterPassword}
+                    onChange={(e) => {
+                      setMasterPassword(e.target.value.trim());
+                    }}
+                    placeholder="Master Password"
+                    required
+                    autoComplete="off"
+                    className="w-full p-2 pr-10 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setIsMasterPasswordVisible((prev) => !prev)}
+                    className="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-500 hover:text-gray-700"
+                  >
+                    {isMasterPasswordVisible ? (
+                      <FiEyeOff size={20} />
+                    ) : (
+                      <FiEye size={20} />
+                    )}
+                  </button>
+                </div>
                 <textarea
                   name="differentiator"
                   value={accountDifferentiator}
@@ -135,15 +151,28 @@ export default function Home() {
                   autoComplete="off"
                   className="w-full p-2 mt-8 border-2 bg-gray-200 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                 />
-                <input
-                  type="text"
-                  name="password"
-                  value={generatedPassword}
-                  placeholder="Password"
-                  disabled
-                  autoComplete="off"
-                  className="w-full p-2 mt-4 border-2 bg-gray-200 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-                />
+                <div className="relative mt-4 w-full">
+                  <input
+                    type={isGeneratedPasswordVisible ? "text" : "password"}
+                    name="password"
+                    value={generatedPassword}
+                    placeholder="Password"
+                    disabled
+                    autoComplete="off"
+                    className="w-full p-2 pr-10 border-2 bg-gray-200 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setIsGeneratedPasswordVisible((prev) => !prev)}
+                    className="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-500 hover:text-gray-700"
+                  >
+                    {isGeneratedPasswordVisible ? (
+                      <FiEyeOff size={20} />
+                    ) : (
+                      <FiEye size={20} />
+                    )}
+                  </button>
+                </div>
 
                 <button
                   type="submit"
@@ -160,10 +189,7 @@ export default function Home() {
             </div>
           </div>
 
-          <Link
-            href="https://mscode.in/"
-            className="mx-auto max-w-5xl mt-4"
-          >
+          <Link href="https://mscode.in/" className="mx-auto max-w-5xl mt-4">
             <p className="text-center text-gray-400">
               Made with ❤️ by Manthan Sharma
             </p>

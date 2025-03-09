@@ -23,6 +23,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@layer utilities {
+  ::-ms-reveal {
+    display: none;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #000000;

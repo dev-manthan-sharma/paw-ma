@@ -28,8 +28,10 @@ export default function Index() {
   const [url, setUrl] = useState("");
   const [masterPassword, setMasterPassword] = useState("");
   const [isMasterPasswordVisible, setIsMasterPasswordVisible] = useState(false);
+  const [accountDifferentiator, setAccountDifferentiator] = useState("");
   const [domainFound, setDomainFound] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
+  const [isGeneratedPasswordVisible, setIsGeneratedPasswordVisible] = useState(false);
   const [error, setError] = useState("");
   const [isCopied, setIsCopied] = useState(false);
 
@@ -43,12 +45,12 @@ export default function Index() {
 
     // If both Url and Master Password are not empty run v1 code and update derived states
     if (url || masterPassword) {
-      const v1 = core.v1(url, masterPassword);
+      const v1 = core.v1(url, masterPassword, accountDifferentiator);
       setDomainFound(v1.domain || "");
       setGeneratedPassword(v1.generatedPassword || "");
       setError(v1.error || "");
     }
-  }, [url, masterPassword]);
+  }, [url, masterPassword, accountDifferentiator]);
 
   // Function to handle ButtonPress
   const handleButtonPress = async () => {
@@ -107,6 +109,7 @@ export default function Index() {
               borderRadius: 16,
               borderColor: "#d1d5dc",
               borderWidth: 1,
+              color: "#000"
             }}
             multiline={true}
             autoCapitalize="none"
@@ -132,6 +135,7 @@ export default function Index() {
                 flex: 1,
                 fontSize: 20,
                 paddingEnd: 12,
+                color: "#000"
               }}
               numberOfLines={1}
               autoCapitalize="none"
@@ -159,6 +163,23 @@ export default function Index() {
               />
             </Pressable>
           </View>
+          <TextInput
+            value={accountDifferentiator}
+            onChangeText={(text) => setAccountDifferentiator(text.trim())}
+            placeholder="Account Differentiator (Optional - always stick to one type: email, username, etc.)"
+            style={{
+              fontSize: 20,
+              padding: 12,
+              marginTop: 24,
+              borderRadius: 16,
+              borderColor: "#d1d5dc",
+              borderWidth: 1,
+              color: "#000"
+            }}
+            multiline={true}
+            autoCapitalize="none"
+            autoComplete="off"
+          />
 
           <TextInput
             value={domainFound}
@@ -171,29 +192,62 @@ export default function Index() {
               borderRadius: 16,
               borderColor: "#d1d5dc",
               borderWidth: 1,
+              color: "#000"
             }}
             editable={false}
             multiline={true}
             autoCapitalize="none"
             autoComplete="off"
           />
-          <TextInput
-            value={generatedPassword}
-            placeholder="Password"
+          <View
             style={{
-              fontSize: 20,
-              backgroundColor: "#e5e7eb",
+              flexDirection: "row",
               marginTop: 24,
               padding: 12,
               borderRadius: 16,
               borderColor: "#d1d5dc",
+              backgroundColor: "#e5e7eb",
               borderWidth: 1,
+              alignItems: "center",
+              justifyContent: "center",
             }}
-            editable={false}
-            multiline={true}
-            autoCapitalize="none"
-            autoComplete="off"
-          />
+          >
+            <TextInput
+              value={generatedPassword}
+              placeholder="Password"
+              style={{
+                flex: 1,
+                fontSize: 20,
+                paddingEnd: 12,
+                color: "#000"
+              }}
+              editable={false}
+              numberOfLines={1}
+              autoCapitalize="none"
+              autoComplete="off"
+              secureTextEntry={!isGeneratedPasswordVisible}
+            />
+            <Pressable
+              style={{
+                borderRadius: 10,
+                overflow: "hidden",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              android_ripple={{
+                color: "#4a5565",
+                borderless: false,
+                foreground: true,
+              }}
+              onPress={() => setIsGeneratedPasswordVisible((prev) => !prev)}
+            >
+              <Feather
+                name={isGeneratedPasswordVisible ? "eye-off" : "eye"}
+                size={24}
+                color="#101828"
+              />
+            </Pressable>
+          </View>
           <Pressable
             style={{
               backgroundColor: error ? "#9f0712" : "#101828",

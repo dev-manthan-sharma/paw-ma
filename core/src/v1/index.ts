@@ -24,6 +24,8 @@ import { extractDomain } from "../utils/index"
  *
  * @property url - The original URL provided to the main function.
  * @property masterPassword - The master password provided to the main function.
+ * @property differentiator - An account-specific differentiator (e.g., username, email, or other account info)
+ *                            used to generate distinct passwords for the same domain.
  * @property domain - The extracted domain from the provided URL (if successfully extracted).
  * @property generatedPassword - The deterministic password generated based on the extracted domain and master password (if generated successfully).
  * @property error - An error message in case of a failure during processing.
@@ -31,6 +33,7 @@ import { extractDomain } from "../utils/index"
 type V1 = {
     url?: string;
     masterPassword?: string;
+    differentiator?: string;
     domain?: string;
     generatedPassword?: string;
     error?: string;
@@ -39,15 +42,17 @@ type V1 = {
 namespace v1 {
 
     /**
-     * Generates a deterministic password based on an identifier and master password.
+     * Generates a deterministic password based on an identifier, differentiator and master password.
      * The function uses multiple rounds of HMAC-SHA256 to generate a seed,
      * which in turn is used by a deterministic pseudo‑random generator to pick characters.
      *
      * @param identifier - A unique identifier (e.g., a domain, service name, or any context).
      * @param masterPassword - The user's secret password.
+     * @param differentiator - An account-specific differentiator (e.g., username, email, or other account info)
+     *                         used to generate distinct passwords for the same identifier.
      * @returns A generated password meeting common complexity rules.
      */
-    function generatePassword(identifier: string, masterPassword: string): string {
+    function generatePassword(identifier: string, masterPassword: string, differentiator: string = ""): string {
         // Check is Master Password Exists
         if (!masterPassword) {
             throw new Error(`Master Password Required`);
@@ -80,7 +85,7 @@ namespace v1 {
         let seed = identifier + masterPassword + salt;
         // "Stretch" the seed using multiple rounds of HMAC-SHA256.
         for (let i = 0; i < rounds; i++) {
-            seed = CryptoJS.HmacSHA256(seed, masterPassword).toString(CryptoJS.enc.Hex);
+            seed = CryptoJS.HmacSHA256(seed + differentiator, masterPassword).toString(CryptoJS.enc.Hex);
         }
 
         // Deterministic pseudo‑random number generator using the final seed.
@@ -135,29 +140,32 @@ namespace v1 {
     }
 
     /**
-     * Main function to generate a deterministic password from a given URL and master password.
+     * Main function to generate a deterministic password from a given URL and master password, and account differentiator.
      *
      * This function first extracts the domain from the provided URL and then uses the domain
-     * along with the user's master password to generate a deterministic password. The generated
-     * password adheres to common complexity rules, ensuring it includes a mix of uppercase,
-     * lowercase, numeric, and special characters. Since the process is deterministic, the same
-     * URL and master password will always produce the same output.
+     * along with the user's master password and an account-specific differentiator to generate 
+     * a deterministic password. The generated password adheres to common complexity rules, ensuring 
+     * it includes a mix of uppercase, lowercase, numeric, and special characters. Since the process 
+     * is deterministic, the same URL and master password will always produce the same output.
      *
      * @param url - A valid URL from which the domain is extracted.
      * @param masterPassword - The user's secret master password used to generate the password.
+     * @param differentiator - An optional account-specific differentiator (e.g., username, email, or other account info)
+     *                         used to generate distinct passwords for the same domain.
      * @returns An object of type V1 containing:
      *            - url: the original URL provided.
      *            - masterPassword: the master password provided.
+     *            - differentiator: the account-specific differentiator provided (if any).
      *            - domain: the extracted domain from the URL (if extraction is successful).
      *            - generatedPassword: the deterministic password generated based on the extracted domain
      *              and the master password (if generation is successful).
      *            - error: an error message if any error occurred during processing.
      */
-    export function main(url: string, masterPassword: string): V1 {
+    export function main(url: string, masterPassword: string, differentiator?: string): V1 {
         try {
             const domain = extractDomain(url);
-            const generatedPassword = generatePassword(domain, masterPassword);
-            return { url, masterPassword, domain, generatedPassword };
+            const generatedPassword = generatePassword(domain, masterPassword, differentiator);
+            return { url, masterPassword, differentiator, domain, generatedPassword };
         } catch (e) {
             return { url, masterPassword, error: e instanceof Error ? e.message : String(e) };
         }

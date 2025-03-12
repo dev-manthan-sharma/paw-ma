@@ -23,6 +23,7 @@ import core from "@dev-manthan-sharma/paw-ma--core";
 import Link from "next/link";
 import packageInfo from "../package.json";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import Image from "next/image";
 
 /**
  * Renders the Home Page
@@ -35,7 +36,8 @@ export default function Home() {
   const [accountDifferentiator, setAccountDifferentiator] = useState("");
   const [domainFound, setDomainFound] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
-  const [isGeneratedPasswordVisible, setIsGeneratedPasswordVisible] = useState(false);
+  const [isGeneratedPasswordVisible, setIsGeneratedPasswordVisible] =
+    useState(false);
   const [error, setError] = useState("");
   const [isCopied, setIsCopied] = useState(false);
 
@@ -91,6 +93,41 @@ export default function Home() {
                 for and paste it here, then type your master password, and it
                 will create a password just for you
               </p>
+              <div className="flex items-center justify-start mt-4 gap-6">
+                <Link href="https://github.com/dev-manthan-sharma/paw-ma/releases/latest/download/paw-ma-mobile.apk">
+                  <Image
+                    src="/android.svg"
+                    alt="android"
+                    width={60}
+                    height={60}
+                    className="w-[60px] h-[60px]"
+                  />
+                </Link>
+                <Link
+                  href="https://chromewebstore.google.com/detail/ihndihdjgemlfcdenhlhkdflfcbaobel"
+                  target="_blank"
+                >
+                  <Image
+                    src="/cws.svg"
+                    alt="android"
+                    width={50}
+                    height={50}
+                    className="w-[50px] h-[50px]"
+                  />
+                </Link>
+                <Link
+                  href="https://github.com/dev-manthan-sharma/paw-ma"
+                  target="_blank"
+                >
+                  <Image
+                    src="/github.svg"
+                    alt="android"
+                    width={50}
+                    height={50}
+                    className="w-[50px] h-[50px]"
+                  />
+                </Link>
+              </div>
             </div>
             <div className="rounded-3xl lg:col-span-2 bg-gray-100 drop-shadow-md shadow-lg shadow-white/50 flex flex-col items-start justify-center self-center">
               <form className="w-full p-8" onSubmit={handleSubmit}>
@@ -163,7 +200,9 @@ export default function Home() {
                   />
                   <button
                     type="button"
-                    onClick={() => setIsGeneratedPasswordVisible((prev) => !prev)}
+                    onClick={() =>
+                      setIsGeneratedPasswordVisible((prev) => !prev)
+                    }
                     className="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-500 hover:text-gray-700"
                   >
                     {isGeneratedPasswordVisible ? (
@@ -197,6 +236,7 @@ export default function Home() {
           <Link
             href="https://github.com/dev-manthan-sharma/paw-ma"
             className="mx-auto max-w-5xl mt-1"
+            target="_blank"
           >
             <p className="text-center text-gray-400">
               {"v" + packageInfo.version}

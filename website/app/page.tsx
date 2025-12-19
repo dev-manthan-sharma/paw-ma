@@ -177,7 +177,7 @@ export default function Home() {
                   placeholder="Account Differentiator (Optional - always stick to one type: email, username, etc.)"
                   autoComplete="off"
                   title="An account-specific differentiator (e.g. username, email) used to generate distinct passwords for the same domain using same master password."
-                  className="w-full p-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent resize-none"
+                  className="w-full min-h-12 max-sm:h-24 [@media(max-width:400px)]:h-32 p-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent resize-none"
                 />
                 <input
                   type="text"
